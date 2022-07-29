@@ -1,7 +1,7 @@
 # quest-submission
 ## Chapter One - Day 1 
 
-## **BLockchain**
+### **Blockchain**
 
 Blockchain is a record-keeping technology designed to make it impossible to hack the system or forge the data stored on it, thereby making it secure and immutable.
 

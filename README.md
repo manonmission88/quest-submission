@@ -50,6 +50,60 @@ The prepare phase is used to access data in the authorizers account, while the e
 <img width="1420" alt="q2" src="https://user-images.githubusercontent.com/98479005/181846584-e42608d9-66ba-4e1b-a2e9-fe348639444b.png">
 <img width="1402" alt="day 2-quest 3 " src="https://user-images.githubusercontent.com/98479005/181846606-d699796c-4758-47d7-b138-f11b403e209c.png">
 
+## Chapter Two - Day 3 
+
+### 1.In a script, initialize an array (that has length == 3) of your favourite people, represented as Strings, and log it.
+<img width="1440" alt="Screen Shot 2022-07-31 at 4 27 27 PM" src="https://user-images.githubusercontent.com/98479005/182044206-2398cc4d-f508-4e24-a5f3-345ceb5265e9.png">
+
+### 2. In a script, initialize a dictionary that maps the Strings Facebook, Instagram, Twitter, YouTube, Reddit, and LinkedIn to a UInt64 that represents the order in which you use them from most to least. For example, YouTube --> 1, Reddit --> 2, etc. If you've never used one before, map it to 0!
+
+
+<img width="1434" alt="Screen Shot 2022-07-31 at 4 31 25 PM" src="https://user-images.githubusercontent.com/98479005/182044214-1adefbb6-60a2-4c26-a588-54e69a6fc852.png">
+
+###  3.Explain what the force unwrap operator ! does, with an example different from the one I showed you (you can just change the type)
+
+
+Before knowing the force-unwrap operator we need to know about the Optionals. Optional types are denoted by the ? sign followed by the type. It means the type is either the type it is saying or the nil. 
+For an example, 
+var myname: String = “A_B”
+Here myname always has to be a string.
+ 
+If we have ? sign, it can also be of type nil. That is it does not necessarily have to be of the type String and we won’t get any compilation error even if it is nil.
+ 
+So, Now comes the force-unwrap operator. This Operator (!) unwraps and optional type. 
+Typically the force-unwrap operator unwraps an optional string type. If the type of the value of the dictionary element does not match the return type declared in the function we use force-unwrap operator. 
+ 
+For example, if we have a dictionary. 
+The return value type of the dictionary is optional. So, if we have to return that value from our function we need to make sure the return type of the function matches the value type returned by the dictionary. So, in our case we might use the force-unwrap operator to (!) change the value type to match the return type of the function
+ 
+Pub fun main(): String {
+Let example: {Int: String} = {10: “Mom”, 20: “Dad”, 30: “Brother}
+Return example[10]!   //The value “Mom” is no longer an optional type. It now becomes the type string and we won’t have any errors in compilation.
+}
+ 
+#### 4.
+The error message means that the function should have the return type of String but it is returning the Optional type String?
+ 
+We are getting the error because of a mismatch in the declared return type of the function and the returned type that is actually being returned. 
+ 
+We can fix it using the force-unwrap operator.
+ 
+## Chapter Two - Day 4 
+
+### 1, 2 , 3 
+
+<img width="1438" alt="Screen Shot 2022-07-31 at 5 22 10 PM" src="https://user-images.githubusercontent.com/98479005/182045876-b8df9426-d390-4b52-9845-d99575299c36.png">
+
+### 4 , 5
+
+<img width="1421" alt="Screen Shot 2022-07-31 at 5 50 25 PM" src="https://user-images.githubusercontent.com/98479005/182046856-4b54dec1-67d4-4e88-9726-f3a8ca39902d.png">
+<img width="1414" alt="Screen Shot 2022-07-31 at 5 50 44 PM" src="https://user-images.githubusercontent.com/98479005/182046860-43651cb2-74c0-4639-b0d0-21cb93a76216.png">
+
+
+
+
+
+
 
 
 

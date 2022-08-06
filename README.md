@@ -101,6 +101,107 @@ We can fix it using the force-unwrap operator.
 
 
 
+## Chapter 3 - Day 1
+
+### 1) In words, list 3 reasons why structs are different from resources.
+
+• Structs can be copied, resource can't.
+• Structs can be created anywhere but resources can only be created inside a contract.
+• Structs can be overwritte, resource can't.
+
+### 2)Describe a situation where a resource might be better to use than a struct.
+If you have a piece of data that is very valuable, such as an expensive NFT, and you want to make sure that you don't lose it or duplicate it, you may want to use a resource instead of a struct to store it.
+
+### 3)What is the keyword to make a new resource?
+ #### Create 
+
+### 4)Can a resource be created in a script or transaction (assuming there isn't a public function to create one)?
+ 
+ No , it can only be created inside a contract. 
+ 
+### 5) What is the type of the resource below?
+
+pub resource Jacob {
+
+}
+
+The resource is type Jacob. 
+
+### 6)
+
+pub contract Test {
+
+    // Hint: There's nothing wrong here ;)
+    pub resource Jacob {
+        pub let rocks: Bool
+        init() {
+            self.rocks = true
+        }
+    }
+
+    pub fun createJacob(): @Jacob { // there is 1 here - Added @
+        let myJacob <- create Jacob() // there are 2 here - Replaced = with <- and added Create
+        return <- myJacob // there is 1 here - Fixed return value to <- myJacob
+    }
+}
+
+## Chapter Three -Day Two 
+
+### 1)Write your own smart contract that contains two state variables: an array of resources, and a dictionary of resources. Add functions to remove and add to each of them. They must be different from the examples above.
+
+pub contract ResourceCollectionExample {
+
+    pub var dictionaryOfNFTs: @{String: DATING}
+    pub var arrayOfNFTs: @[DATING]
+
+
+    pub resource DATING {
+        pub let url: String
+        init() {
+            self.url = "http://someurl"
+        }
+    }
+
+    pub fun addDATINGToDict(nft: @DATING) {
+        let key = dating.url
+        let oldGreeting <- self.dictionaryOfDATINGs[key] <- dating
+        destroy oldGreeting
+    }
+
+    pub fun removeDATINGFromDict(key: String): @DATING {
+        let removedDATING <- self.dictionaryOfDATINGs.remove(key: key) ?? panic("Could not find the DATING PERSON!")
+        return <- removedDATING
+    }
+
+    pub fun addDATINGToArray(nft: @DATING) {
+        self.arrayOfDATINGs.append(<- dating)
+    }
+
+    pub fun removeDATINGFromArray(index: Int): @DATING {
+        return <- self.arrayOfDATINGs.remove(at: index)
+    }
+
+
+    init() {
+        self.dictionaryOfDATINGs <- {}
+        self.arrayOfDATINGs <- []
+    }
+
+}
+
+## Chapter Three - Day Three 
+
+### 1) Define your own contract that stores a dictionary of resources. Add a function to get a reference to one of the resources in the dictionary.
+
+<img width="1428" alt="Screen Shot 2022-08-06 at 3 02 15 PM" src="https://user-images.githubusercontent.com/98479005/183262705-7f0f1ed1-6590-4dc8-bd08-286247e66b68.png">
+
+
+### 2)Create a script that reads information from that resource using the reference from the function you defined in part 1.
+<img width="1431" alt="Screen Shot 2022-08-06 at 3 13 22 PM" src="https://user-images.githubusercontent.com/98479005/183263131-f548c929-4f26-4fe7-9e48-b838c20d60ec.png">
+
+### 3)Explain, in your own words, why references can be useful in Cadence.
+
+Reference help avoid moving resource and refer to resource without needing to move it.
 
 
 

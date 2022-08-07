@@ -204,7 +204,50 @@ pub contract ResourceCollectionExample {
 Reference help avoid moving resource and refer to resource without needing to move it.
 
 
+## Chapter Three - Day Four 
 
+### 1)Explain, in your own words, the 2 things resource interfaces can be used for
+
+Resource interfaces can be used for : 
+•Making  sure that a Resource provides specific variables or functions
+•Allowing for data encapsulation where a resource could hide its internal methods and data from the outside world.
+
+### 2)Define your own contract. Make your own resource interface and a resource that implements the interface. Create 2 functions. In the 1st function, show an example of not restricting the type of the resource and accessing its content. In the 2nd function, show an example of restricting the type of the resource and NOT being able to access its content.
+
+<img width="1431" alt="Screen Shot 2022-08-06 at 8 00 27 PM" src="https://user-images.githubusercontent.com/98479005/183269541-3d97d617-ac89-4154-961a-4911b4567e32.png">
+
+### 3
+pub contract Stuff {
+
+    pub struct interface ITest {
+      pub var greeting: String
+      pub var favouriteFruit: String
+      pub fun changeGreeting(newGreeting: String): String // Fix 1
+    }
+
+    // ERROR:
+    // `structure Stuff.Test does not conform 
+    // to structure interface Stuff.ITest`
+    pub struct Test: ITest {
+      pub var greeting: String
+      pub var favouriteFruit: String // Fix 2
+      pub fun changeGreeting(newGreeting: String): String {
+        self.greeting = newGreeting
+        return self.greeting // returns the new greeting
+      }
+
+      init() {
+        self.greeting = "Hello!"
+        self.favouriteFruit = "grapes"
+      }
+    }
+
+    pub fun fixThis() {
+      let test: Test{ITest} = Test()
+      let newGreeting = test.changeGreeting(newGreeting: "Bonjour!") // ERROR HERE: `member of restricted type is not accessible: changeGreeting`
+      log(newGreeting)
+    }
+}
 
 
 

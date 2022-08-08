@@ -352,4 +352,79 @@ pub fun main() {
 }
 
 
+##Chapter Four - Day 1
+
+### 1)Explain what lives inside of an account.
+
+•Contract code - Multiple contracts can live inside the code.
+•Account Storage - container of data that lives within a certain path. (/storage/, /public/, /private/)
+
+### 2) What is the difference between the /storage/, /public/, and /private/ paths?
+
+All of the data goes in the /storage path, and data can be placed in either the /public or /private paths (like a symlink) to specify who should be able to access it.
+
+### 3)What does .save() do? What does .load() do? What does .borrow() do?
+•save() - stores data in account storage so takes parameters(data, storage/PATH_NAME) 
+•load() - retrieves and takes out data from account storage takes parameter(from: storage/PATH_NAME) .
+•borrow() - allows looking at data without taking it out from storage by making use of references it takes parameter(from: STORAGE_PATH)
+
+### 4)Explain why we couldn't save something to our account storage inside of a script.
+Scripts are only readable. Saving data involves moving the data, so you will not be able to do that in a script.
+
+### 5)Explain why I couldn't save something to your account.
+We are only able to access the AuthAccount in the prepare() block of a transaction. This means a script does not have access to the AuthAccount. Also, a script can only read data, and cannot write data.
+
+### 6)Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
+
+i)A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
+
+ii) A transaction that first saves the resource to account storage, then borrows a reference to it, and logs a field inside the resource.
+
+pub contract Basketball {
+
+  pub resource NBA {
+    pub var name: String
+    init() {
+      self.name = "Lebron"
+    }
+  }
+
+  pub fun createNBA(): @NBA {
+    return <- create NBA()
+  }
+
+}
+
+ i. 
+ 
+ import Basketball from 0x04
+transaction() {
+  prepare(signer: AuthAccount) {
+    let nbaResource <- signer.load<@Basketball.NBA>(from: /storage/MyNBAResource)
+                          ?? panic
+    log(nbaResource.name) 
+
+    destroy nbaResource
+  }
+
+  execute {
+
+  }
+}
+
+ii. 
+```cadence
+import Basketball from 0x04
+transaction() {
+  prepare(signer: AuthAccount) {
+    let nbaResource = signer.borrow<&Basketball.NBA>(from: /storage/MyNBAResource)
+                          ?? panic
+    log(nbaResource.name)
+  }
+
+  execute {
+
+  }
+}
+
 
